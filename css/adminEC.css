@@ -1,0 +1,187 @@
+@import url('admin.css');
+
+/* General Layout */
+.content {
+  max-width: 1200px;
+  width: 100%;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.05);
+}
+
+/* Container Layout */
+.exam-container {
+  display: block;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+/* Form Styles */
+.exam-form {
+  flex: 1 1 300px;
+  min-width: 300px;
+  background-color: #f9fafb;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+}
+
+.exam-form h3 {
+  margin-bottom: 20px;
+  font-size: 22px;
+  color: #111827;
+}
+
+.exam-form label {
+  display: block;
+  margin-top: 15px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.exam-form .form-control {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 5px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.exam-form .submit-btn {
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.exam-form .submit-btn:hover {
+  background-color: #1e40af;
+}
+
+.exam-form .msg {
+  margin-top: 15px;
+  color: #10b981;
+  font-weight: 500;
+}
+
+/* Table Styles */
+.exam-table {
+  flex: 1 1 100%;
+}
+
+.exam-table h2 {
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #1f2937;
+}
+
+.exam-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #f9fafb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.exam-table th, .exam-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.exam-table th {
+  background-color: #f3f4f6;
+  color: #374151;
+  font-weight: 600;
+}
+
+.exam-table tr:hover {
+  background-color: #f1f5f9;
+}
+
+.exam-table a {
+  color: #2563eb;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+.exam-table a:hover {
+  text-decoration: underline;
+    }
+    .content {
+    max-width: 2000px;   /* keep your current width if you want */
+    margin: 0;           /* remove auto-centering */
+    padding-left: 0;     /* remove left padding */
+    padding-right: 20px; /* keep a bit on the right if needed */
+    }
+    .content h2,
+    .content h3,
+    .content p {
+    text-align: left;
+
+    }
+    .content h2 {
+      margin-bottom: 1rem;
+      color: #2c3e50;
+    }
+    .content h3 {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: #34495e;
+      border-left: 4px solid #3498db;
+      padding-left: 10px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .grid-2 p {
+      background: #f0f3f5;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .grid-2 p strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #2c3e50;
+    }
+    .status {
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 5px;
+      display: inline-block;
+    }
+    .status.pending { background: #f1c40f33; color: #f39c12; }
+    .status.accepted { background: #2ecc7133; color: #27ae60; }
+    .status.rejected { background: #e74c3c33; color: #c0392b; }
+    form button {
+      padding: 10px 20px;
+      border: none;
+      background: #3498db;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      margin-right: 10px;
+    }
+    form button[name="reject"] {
+      background: #e74c3c;
+}
+
+.content {
+  width: 100%;
+  background: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+    

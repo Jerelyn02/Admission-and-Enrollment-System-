@@ -1,0 +1,228 @@
+/* Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    background-color: darkblue;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 0;
+    position: fixed;
+    height: 100%;
+}
+
+.nav-top, .nav-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.nav-btn:hover {
+    background-color: rgb(81, 121, 253);
+}
+
+/* Main area */
+.main {
+    margin-left: 220px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #f4f4f4;
+}
+
+/* Topbar */
+.topbar {
+    background-color: #ffffff;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+}
+
+.topbar .left h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: darkblue;
+}
+
+.topbar .right p {
+    margin: 0 10px 0 0;
+    display: inline-block;
+}
+
+.topbar .right button {
+    padding: 8px 16px;
+    background-color: darkblue;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.topbar .right button:hover {
+    background-color: rgb(81, 121, 253);
+}
+
+/* Content */
+.content {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+/* Cards */
+.card, .card3 {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    transition: transform 0.2s ease;
+    margin-bottom: 20px;
+}
+
+.card h3, .card3 h3 {
+    margin-bottom: 20px;
+    color: darkblue;
+}
+
+.card p, .card3 p {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+/* Dashboard buttons */
+.button2, .btn {
+    padding: 12px 30px;
+    background-color: darkblue;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button2:hover, .btn:hover {
+    background-color: #1565c0;
+}
+
+/* Dashboard progress circles */
+.dashboard-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.circle-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s;
+}
+
+.circle-box:hover {
+    transform: scale(1.05);
+}
+
+.circle {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+.completed {
+    background-color: #007bff;
+}
+
+.circle-label {
+    margin-top: 12px;
+    font-size: 14px;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.topbar {
+    background-color: #ffffff;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+}
+
+.topbar .left {
+    flex: 1;
+}
+
+.topbar .left h1.topbar-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: darkblue;
+    margin: 0;
+}
+
+.topbar .right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+}
+
+.topbar .right p {
+    margin: 0;
+}
+
+.topbar .right button {
+    padding: 8px 16px;
+    background-color: darkblue;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.topbar .right button:hover {
+    background-color: rgb(81, 121, 253);
+}
