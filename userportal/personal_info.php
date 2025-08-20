@@ -41,7 +41,16 @@ if(isset($_POST['submit'])){
     $region = $_POST['region'];
     $province = $_POST['province'];
     $town = $_POST['town'];
-    $phonenumber = $_POST['phone'];
+    $phoneInput = $_POST['phone'];
+
+// If user typed starting with 09, convert to +639xxxxxxxxx
+if (preg_match('/^09\d{9}$/', $phoneInput)) {
+    $phonenumber = '+63' . substr($phoneInput, 1); // removes leading 0
+} else {
+    // Default: always prepend +63 if not already present
+    $phonenumber = (strpos($phoneInput, '+63') === 0) ? $phoneInput : '+63' . ltrim($phoneInput, '0');
+}
+
     $civilstatus = $_POST['civilstatus'];
     $sex = $_POST['sex'];
     $birthday = $_POST['birthday'];
@@ -235,10 +244,17 @@ if(isset($_POST['submit'])){
                 </div>
 
                 <div class="form-control">
-                    <label for="phone">Phone Number</label>
-                    <input type="text" name="phone" id="phone" value="<?php echo htmlspecialchars($phonenumber); ?>">
-                    <?php if(isset($errors['phonenumber'])): ?><span class="msg" style="color:red;"><?php echo $errors['phonenumber']; ?></span><?php endif; ?>
-                </div>
+    <label for="phone">Phone Number</label>
+    <div style="display: flex; align-items: center;">
+        <span style="padding: 8px; background: #f0f0f0; border: 1px solid #ccc; border-right: none; border-radius: 4px 0 0 4px;">+63</span>
+        <input type="text" name="phone" id="phone" 
+               value="<?php echo htmlspecialchars(str_replace('+63', '', $phonenumber)); ?>" 
+               maxlength="10" 
+               style="flex: 1; border-radius: 0 4px 4px 0;">
+    </div>
+    <?php if(isset($errors['phonenumber'])): ?><span class="msg" style="color:red;"><?php echo $errors['phonenumber']; ?></span><?php endif; ?>
+</div>
+
             </div>
 
             <!-- Submit Button -->
@@ -251,6 +267,13 @@ if(isset($_POST['submit'])){
 
 <!-- JavaScript for dynamic filtering -->
 <script>
+// Restrict phone field to numbers only and max 10 digits
+document.getElementById('phone').addEventListener('input', function(e){
+    this.value = this.value.replace(/[^0-9]/g, ''); 
+    if (this.value.length > 10) {
+        this.value = this.value.slice(0, 10);
+    }
+});
 const regionProvinceTown = {
     "Ilocos Region (Region I)": {
         "Ilocos Norte": ["Laoag", "Batac", "Paoay", "Pagudpud"],
@@ -417,3 +440,4 @@ window.addEventListener('load', ()=>{
 });
 
 </script>
+
