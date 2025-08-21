@@ -1,0 +1,120 @@
+<?php
+include("php/connection.php");
+session_start();
+
+$msg = '';
+$msgClass = ''; // <-- NEW
+
+// ✅ load PHPMailer classes
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'phpmailer/src/Exception.php';
+require 'phpmailer/src/PHPMailer.php';
+require 'phpmailer/src/SMTP.php';
+
+if (isset($_POST['submit'])) {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $cpassword = $_POST['cpassword'];
+
+    // Default role = user
+    $user_type = "user";
+
+    if ($password !== $cpassword) {
+        $msg = "Passwords do not match!";
+        $msgClass = "error";
+    } else {
+        // check if email already exists
+        $check = mysqli_query($conn, "SELECT * FROM accounts WHERE email='$email'");
+        if (mysqli_num_rows($check) > 0) {
+            $msg = "Email already registered!";
+            $msgClass = "error";
+        } else {
+            // generate code & hash password
+            $verification_code = md5(uniqid($email, true));
+            $hashed_pass = password_hash($password, PASSWORD_DEFAULT);
+
+            $insert = "INSERT INTO accounts (name, email, password, user_type, email_verified, verification_code) 
+                       VALUES ('$name', '$email', '$hashed_pass', '$user_type', 0, '$verification_code')";
+
+            if (mysqli_query($conn, $insert)) {
+                $mail = new PHPMailer(true);
+                try {
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com';
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'teodoro.torres@cvsu.edu.ph'; // your Gmail
+                    $mail->Password = 'onya pxez onks fqws';       // your Gmail App Password
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                    $mail->Port = 587;
+
+                    $mail->setFrom("teodoro.torres@cvsu.edu.ph", "Imus International University Admission");
+                    $mail->addAddress($email);
+                    $mail->isHTML(true);
+                    $mail->Subject = "Verify your email";
+                    $mail->Body = "Click this link to verify your email: 
+                    <a href='http://localhost/FINALSYSTEM/verify.php?code=$verification_code'>Verify Now</a>";
+
+                    $mail->send();
+                    $msg = "Registration successful! Check your email to verify your account.";
+                    $msgClass = "success";
+                } catch (Exception $e) {
+                    $msg = "Mailer Error: " . $mail->ErrorInfo;
+                    $msgClass = "error";
+                }
+            } else {
+                $msg = "Database insert failed: " . mysqli_error($conn);
+                $msgClass = "error";
+            }
+        }
+    }
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="css/logreg.css">
+  <style>
+    .msg { font-weight: bold; text-align: center; margin-bottom: 10px; }
+    .msg.success { color: #22C55E; } /* Green */
+    .msg.error { color: #F87171; }   /* Red */
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="left">
+      <img src="image/logo_new2.png" class="login-logo">
+    </div>
+    <div class="right">
+      <form action="" method="post">
+        <h2>Create Account</h2>
+        <p class="msg <?php echo $msgClass; ?>"><?php echo $msg; ?></p>
+        
+        <div class="form-group">
+          <input type="text" name="name" placeholder="Enter your name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <input type="email" name="email" placeholder="Enter your email" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <input type="password" name="password" placeholder="Enter your password" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <input type="password" name="cpassword" placeholder="Confirm password" class="form-control" required>
+        </div>
+
+        <!-- Hidden role (always user) -->
+        <input type="hidden" name="user_type" value="user">
+
+        <button class="btn" name="submit">Sign Up</button>
+        <p style="margin-top: 10px; text-align: center;">
+          Already have an account? <a href="login.php">Login</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
